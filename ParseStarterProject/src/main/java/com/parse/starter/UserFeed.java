@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -33,27 +34,20 @@ public class UserFeed extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        String activeUserName = i.getStringExtra("username");
+        String objectID = i.getStringExtra("object ID");
 
-        Log.i("AppInfo", activeUserName);
+        //Log.i("AppInfo", activeUserName);
 
-        setTitle(activeUserName + "'s Feed");
+        setTitle("Fish Pic");
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Images");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Leaderboard");
 
-        query.whereEqualTo("username", activeUserName);
+        query.getInBackground(objectID, new GetCallback<ParseObject>() {
 
-        query.orderByDescending("createdAt");
-
-        query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> objects, ParseException e) {
+            public void done(ParseObject object, ParseException e) {
 
                 if (e==null) {
-
-                    if (objects.size() >0) {
-
-                        for (ParseObject object : objects){
 
                             ParseFile file = (ParseFile) object.get("image");
 
@@ -77,8 +71,8 @@ public class UserFeed extends AppCompatActivity {
 
                         }
                     }
-                }
+                });
             }
-        });
+
     }
-}
+

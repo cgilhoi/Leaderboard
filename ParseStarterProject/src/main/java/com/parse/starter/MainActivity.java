@@ -10,7 +10,6 @@ package com.parse.starter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     Log.i("AppInfo", "Signup Successful");
 
-                    Intent i = new Intent(getApplicationContext(), UserList.class);
+                    Intent i = new Intent(getApplicationContext(), TourneyName.class);
                     startActivity(i);
 
                 } else {
@@ -101,9 +99,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void done(ParseUser user, ParseException e) {
 
-                    if (user ==null) {
+                    if (user != null) {
 
                         Log.i("AppInfo", "Login Successful");
+
+                        Intent i = new Intent(getApplicationContext(), TourneyName.class);
+                        startActivity(i);
 
                     } else {
 
@@ -112,31 +113,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
 
-
                 }
 
             });
-        }
 
+        }
     }
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-      if (ParseUser.getCurrentUser()!= null) {
+      setTitle("Leaderboard App Login");
 
-          Intent i = new Intent(getApplicationContext(), UserList.class);
+      if (ParseUser.getCurrentUser().getUsername() != null) {
+
+
+
+         Intent i = new Intent(getApplicationContext(), TourneyName.class);
           startActivity(i);
 
       }
 
       signUpModeActive=true;
 
-      usernameField = (EditText) findViewById(R.id.username);
+      usernameField = (EditText) findViewById(R.id.tourneyName);
       passwordField = (EditText) findViewById(R.id.password);
       changeSignUpModeTextView = (TextView) findViewById(R.id.changeSignUpMode);
-      signUpButtonText = (Button) findViewById(R.id.signUpButton);
+      signUpButtonText = (Button) findViewById(R.id.registerButton);
 
       changeSignUpModeTextView.setOnClickListener(this);
 

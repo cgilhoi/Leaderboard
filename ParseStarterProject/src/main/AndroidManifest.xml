@@ -36,7 +36,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserList" />
-        <activity android:name=".UserFeed"></activity>
+        <activity android:name=".UserFeed" />
+        <activity android:name=".FishDetails" />
+        <activity android:name=".Leaderboard2" />
+        <activity android:name=".TourneyName" />
+        <activity android:name=".DeleteObject" />
+        <activity android:name=".TourneyCreate" />
+        <activity android:name=".PictureUpload" />
+        <activity android:name=".LeaderboardAlt" />
+        <activity android:name=".TourneyInfo" />
+        <activity android:name=".LinkToWebpage"></activity>
     </application>
 
 </manifest>
